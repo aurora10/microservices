@@ -1,13 +1,13 @@
 version: '3.7'
 services:
-  frontend:
-    image: antoniopapa1991/admin-frontend
-    ports:
-      - 8080:80
-    depends_on:
-      - backend
-    networks:
-      - app
+  # frontend:
+  #   image: antoniopapa1991/admin-frontend
+  #   ports:
+  #     - 8080:80
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - app
 
   backend:
     container_name: admin_api
@@ -20,7 +20,7 @@ services:
       DB_USERNAME: root
       DB_PASSWORD: root
     ports:
-      - 8000:8000
+      - 8000:8000 
     volumes:
       - .:/app
     depends_on:
