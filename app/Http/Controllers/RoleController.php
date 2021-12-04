@@ -29,7 +29,7 @@ class RoleController extends Controller
         return Role::find($id);
     }
 
-    
+     
     public function update(Request $request, $id)
     {
         $role = Role::find($id);
