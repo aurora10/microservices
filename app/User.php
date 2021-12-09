@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Role;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -28,6 +29,8 @@ class User extends Authenticatable
     ];
     public $timestamps = false;
 
-    
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
    
 }
