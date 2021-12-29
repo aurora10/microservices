@@ -13,7 +13,7 @@ class ImageController extends Controller
         $file = $request->file('image');
 
         $name = Str::random(10);
-        $url = \Storage::putFileAs('/images', $file, $name . '.' . $file->getClientOriginalExtension());
+        $url = asset(\Storage::putFileAs('images', $file, $name . '.' . $file->getClientOriginalExtension())) ;
 
         return ['url' =>env('APP_URL').  $url];
     }
