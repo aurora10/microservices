@@ -10,17 +10,17 @@ services:
   #     - app
 
   backend:
-    container_name: admin_api
+    # container_name: admin_api
     build:
       context: .
       dockerfile: Dockerfile
     environment:
       DB_HOST: db
-      DB_DATABASE: admin
+      DB_DATABASE: influencer
       DB_USERNAME: root
       DB_PASSWORD: root
     ports:
-      - 8000:8000 
+      - 8000:8000
     volumes:
       - .:/app
     depends_on:
@@ -29,11 +29,11 @@ services:
       - app
 
   db:
-    container_name: admin_db
+    # container_name: admin_db
     image: mysql:5.7.22
     restart: always
     environment:
-      MYSQL_DATABASE: admin
+      MYSQL_DATABASE: influencer
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root

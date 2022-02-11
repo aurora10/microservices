@@ -34,6 +34,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleId($value)
  * @mixin \Eloquent
+ * @property int $is_influencer
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsInfluencer($value)
  */
 class User extends Authenticatable
 {
@@ -66,6 +68,14 @@ class User extends Authenticatable
 
     public function hasAccess($access) {
         return $this->permissions()->contains($access);
+    }
+
+    public function isAdmin() : bool {
+        return $this->is_influencer === 0;
+    }
+
+    public function isInfluencer() : bool {
+        return $this->is_influencer === 1;
     }
 
 }
