@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Http\Controllers\Checkout;
+use App\Http\Controllers;
+
+use App\Http\Resources\LinkResource;
+use App\Link;
+use Illuminate\Http\Request;
+
+class linkController
+{
+    public function show($code)
+    {
+        $link = Link::where('code', $code)->first();
+
+        return new LinkResource($link);
+    }
+}

@@ -34,7 +34,7 @@ function() {
 });
 
 //Admin
-Route::group(['middleware' => 'auth:api',
+Route::group(['middleware' => ['auth:api', 'scope:admin'],
                'prefix' => 'admin',
                 'namespace' => 'Admin'],
                 function() {
@@ -59,4 +59,22 @@ Route::group([
                 'namespace' => 'Influencer'],
                 function() {
                     Route::get('products', 'ProductController@index');
-                });
+
+                    Route::group([
+                        'middleware' => ['auth:api', 'scope:influencer'],
+                    ], function () {
+                            Route::post('links', 'LinkController@store');
+                    });
+
+
+
+});
+
+//CHeckout
+Route::group([
+    'prefix' => 'checkout',
+     'namespace' => 'Checkout'],
+     function() {
+            Route::get('links/{code}', 'LinkController@show');
+            Route::post('orders', 'OrderController@store');
+     });

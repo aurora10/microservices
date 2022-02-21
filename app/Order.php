@@ -28,6 +28,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed $total
  * @property-read \Illuminate\Database\Eloquent\Collection|OrderItem[] $orderItems
  * @property-read int|null $order_items_count
+ * @property string $code
+ * @property int $user_id
+ * @property string $influencer_email
+ * @property string|null $address
+ * @property string|null $address2
+ * @property string|null $city
+ * @property string|null $country
+ * @property string|null $zip
+ * @property int $complete
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereAddress2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereComplete($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereInfluencerEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereZip($value)
  */
 class Order extends Model
 {

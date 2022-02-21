@@ -22,7 +22,14 @@ class AuthController
         if(Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 
-            $token = $user->createToken('admin')->accessToken;
+            $scope = $request->input('scope');
+             if($user->isInfluencer() && $scope !== 'influencer') {
+                return response([
+                    'error' => 'Access denied'
+                ], Response::HTTP_FORBIDDEN);
+            }
+
+            $token = $user->createToken($scope, [$scope])->accessToken;
 
             $cookie = \cookie('jwt', $token, 3600);
 
@@ -48,7 +55,7 @@ class AuthController
 
     public function register(RegisterRequest $request) {
         $user =  User::create($request->only('first_name','last_name', 'email') + ['password' => Hash::make($request->input('password')),
-        'role_id' => 1,
+        // 'role_id' => 1,
         'is_influencer' => 1                ]);
 
         return response($user, Response::HTTP_CREATED);
