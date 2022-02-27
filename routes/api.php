@@ -64,6 +64,8 @@ Route::group([
                         'middleware' => ['auth:api', 'scope:influencer'],
                     ], function () {
                             Route::post('links', 'LinkController@store');
+                            Route::get('stats', 'StatsController@index');
+                            Route::get('rankings', 'StatsController@ranking');
                     });
 
 
@@ -77,4 +79,5 @@ Route::group([
      function() {
             Route::get('links/{code}', 'LinkController@show');
             Route::post('orders', 'OrderController@store');
+            Route::post('orders/confirm', 'OrderController@confirm');
      });

@@ -19,12 +19,14 @@ services:
       DB_DATABASE: influencer
       DB_USERNAME: root
       DB_PASSWORD: root
+      REDIS_HOST:  127.0.0.1
     ports:
       - 8000:8000
     volumes:
       - .:/app
     depends_on:
       - db
+      - redis
     networks:
       - app
 
@@ -43,6 +45,9 @@ services:
       - 33066:3306
     networks:
       - app
+
+  redis:
+    image: redis:latest
 
 networks:
   app:

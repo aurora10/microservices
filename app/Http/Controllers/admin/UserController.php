@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use App\Events\AdminAddedEvent;
 use App\User;
 
 use Illuminate\Http\Request;
@@ -50,6 +50,8 @@ class UserController
             'role_id' => $request->input('role_id')
         ]);
 
+        event(new AdminAddedEvent($user));
+
         return response(new UserResource($user), Response::HTTP_CREATED);
 
    }
@@ -62,7 +64,7 @@ class UserController
 
        $user->update($request->only('first_name','last_name', 'email'));
 
-       UserRole::where('user_id', $user->id)->delete(); 
+       UserRole::where('user_id', $user->id)->delete();
 
        UserRole::create([
         'user_id' => $user->id,

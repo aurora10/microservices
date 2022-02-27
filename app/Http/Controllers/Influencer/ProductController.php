@@ -3,22 +3,36 @@
 namespace App\Http\Controllers\Influencer;
 
 use App\Product;
-use App\Http\Resources\ProductResource;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
+use Illuminate\Filesystem\Cache;
+use App\Http\Resources\ProductResource;
 
 class ProductController
 
 {
     public function index(Request $request){
 
-        $query = Product::query();
-        if($s = $request->input('s')) {
-            $query->whereRaw("title LIKE '%{$s}%'")
-            ->orWhereRaw("description LIKE '%{$s}%'");
-        }
+        $products =  \Cache::remember('products', 60*30, function () use ($request) {
+            sleep(3);
 
 
-        return ProductResource::collection($query->get());
+           return Product::all();
+        });
+
+
+            if($s = $request->input('s')) {
+
+                $products = $products->filter(function(Product $product) use($s){
+                    return Str::contains($product->title, $s) || Str::contains($product->title, $s);
+                });
+
+            }
+
+
+            return ProductResource::collection($products);
+
+
     }
 }

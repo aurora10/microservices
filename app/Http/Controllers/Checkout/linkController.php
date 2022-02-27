@@ -7,7 +7,7 @@ use App\Http\Resources\LinkResource;
 use App\Link;
 use Illuminate\Http\Request;
 
-class linkController
+class LinkController
 {
     public function show($code)
     {

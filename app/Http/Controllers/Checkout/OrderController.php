@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Checkout;
 
-
+use App\Events\OrderCompletedEvent;
 use App\Link;
 use App\Order;
 use App\Product;
 use App\OrderItem;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController
 {
@@ -22,7 +24,7 @@ class OrderController
         $order->first_name = $request->input('first_name');
         $order->last_name = $request->input('last_name');
         $order->email = $request->input('email');
-        $order->code= $link->code;
+        $order->code = $link->code;
         $order->user_id = $link->user->id;
         $order->influencer_email = $link->user->email;
         $order->address = $request->input('address');
@@ -35,7 +37,7 @@ class OrderController
 
         $lineItems = [];
 
-        foreach($request->input('items') as $item) {
+        foreach ($request->input('items') as $item) {
             $product = Product::find($item['product_id']);
 
             $orderItem = new OrderItem();
@@ -60,8 +62,6 @@ class OrderController
                 'quantity' => $orderItem->quantity
 
             ];
-
-
         }
 
         $stripe = Stripe::make(env('STRIPE_SECRET'));
@@ -79,5 +79,36 @@ class OrderController
         \DB::commit();
 
         return $source;
+    }
+
+    public function confirm(Request $request)
+    {
+        $order = Order::whereTransactionId($request->input('source'))->first();
+
+        if (!$order) {
+            return response([
+                'error' => 'order not found'
+            ], 404);
+        }
+        $order->complete = 1;
+        $order->save();
+
+        event(new OrderCompletedEvent($order));
+
+        // \Mail::send('admin', ['order' => $order], function (Message $message) {
+        //     $message->to('aurora10@gmail.com');
+        //     $message->from('aurora10@gmail.com');
+        //     $message->subject('A new order has been completed');
+        // });
+
+        // \Mail::send('influencer', ['order' => $order], function (Message $message) use ($order) {
+        //     $message->to($order->influencer_email);
+        //     $message->from('aurora10@gmail.com');
+        //     $message->subject('A new order has been completed');
+        // });
+
+        return response([
+            'message' => 'success'
+        ]);
     }
 }
