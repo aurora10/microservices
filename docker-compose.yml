@@ -19,7 +19,7 @@ services:
       DB_DATABASE: influencer
       DB_USERNAME: root
       DB_PASSWORD: root
-      REDIS_HOST:  127.0.0.1
+      REDIS_HOST:  redis
     ports:
       - 8000:8000
     volumes:
@@ -48,6 +48,9 @@ services:
 
   redis:
     image: redis:latest
+    networks:
+      - app
+
 
 networks:
   app:

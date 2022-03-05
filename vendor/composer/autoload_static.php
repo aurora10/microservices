@@ -673,9 +673,11 @@ class ComposerStaticInita9d6f8d0a835ac0fb64f82d81a3bcb10
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\UpdateRankigsCommand' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateRankigsCommand.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\AdminAddedEvent' => __DIR__ . '/../..' . '/app/Events/AdminAddedEvent.php',
         'App\\Events\\OrderCompletedEvent' => __DIR__ . '/../..' . '/app/Events/OrderCompletedEvent.php',
+        'App\\Events\\ProductUpdatedEvent' => __DIR__ . '/../..' . '/app/Events/ProductUpdatedEvent.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Checkout\\LinkController' => __DIR__ . '/../..' . '/app/Http/Controllers/Checkout/LinkController.php',
@@ -712,6 +714,7 @@ class ComposerStaticInita9d6f8d0a835ac0fb64f82d81a3bcb10
         'App\\Listeners\\NotifyAdminAddedListener' => __DIR__ . '/../..' . '/app/Listeners/NotifyAdminAddedListener.php',
         'App\\Listeners\\NotifyAdminListener' => __DIR__ . '/../..' . '/app/Listeners/NotifyAdminListener.php',
         'App\\Listeners\\NotifyInfluencerListener' => __DIR__ . '/../..' . '/app/Listeners/NotifyInfluencerListener.php',
+        'App\\Listeners\\ProductCasheFlush' => __DIR__ . '/../..' . '/app/Listeners/ProductCasheFlush.php',
         'App\\Order' => __DIR__ . '/../..' . '/app/Order.php',
         'App\\OrderItem' => __DIR__ . '/../..' . '/app/OrderItem.php',
         'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',

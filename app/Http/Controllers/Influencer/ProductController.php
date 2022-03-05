@@ -25,7 +25,7 @@ class ProductController
             if($s = $request->input('s')) {
 
                 $products = $products->filter(function(Product $product) use($s){
-                    return Str::contains($product->title, $s) || Str::contains($product->title, $s);
+                    return Str::contains($product->title, $s) || Str::contains($product->description, $s);
                 });
 
             }

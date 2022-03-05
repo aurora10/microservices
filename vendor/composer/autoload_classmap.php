@@ -6,9 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\UpdateRankigsCommand' => $baseDir . '/app/Console/Commands/UpdateRankigsCommand.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\AdminAddedEvent' => $baseDir . '/app/Events/AdminAddedEvent.php',
     'App\\Events\\OrderCompletedEvent' => $baseDir . '/app/Events/OrderCompletedEvent.php',
+    'App\\Events\\ProductUpdatedEvent' => $baseDir . '/app/Events/ProductUpdatedEvent.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Checkout\\LinkController' => $baseDir . '/app/Http/Controllers/Checkout/LinkController.php',
@@ -45,6 +47,7 @@ return array(
     'App\\Listeners\\NotifyAdminAddedListener' => $baseDir . '/app/Listeners/NotifyAdminAddedListener.php',
     'App\\Listeners\\NotifyAdminListener' => $baseDir . '/app/Listeners/NotifyAdminListener.php',
     'App\\Listeners\\NotifyInfluencerListener' => $baseDir . '/app/Listeners/NotifyInfluencerListener.php',
+    'App\\Listeners\\ProductCasheFlush' => $baseDir . '/app/Listeners/ProductCasheFlush.php',
     'App\\Order' => $baseDir . '/app/Order.php',
     'App\\OrderItem' => $baseDir . '/app/OrderItem.php',
     'App\\Permission' => $baseDir . '/app/Permission.php',
